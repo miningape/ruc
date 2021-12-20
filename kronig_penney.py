@@ -1,12 +1,12 @@
-import numpy as cmath
+import numpy as np
 import matplotlib.pyplot as plt
 import cmath
 
 if __name__ == '__main__':
   # Physical constants
-  h = 6.62607015e-34
+  h = 1
   h_bar = h / (2 * cmath.pi)
-  m = 9.10938356e-31
+  m = 1
 
   # Constants in the problem
   a = 1
@@ -32,19 +32,25 @@ if __name__ == '__main__':
   Alpha_2 = -Beta_2 * (((1 - (B / A)) * (cmath.e**(1j * A * a))) + ((1 + (B / A)) * (cmath.e**(-1j * A * a))) - (2 * (cmath.e**(1j * ((k * a) + ((k + B) * b))))) ) / (((1 - (B / A)) * (cmath.e**(-1j * A * a))) + ((1 + (B / A)) * (cmath.e**(1j * A * a))) - (2 * (cmath.e**(1j * ((k * a) + ((k - B) * b))))) )
 
   def Psi1(x):
-    (Alpha_1 * (cmath.e ** (1j * A * x))) + (Beta_1 * (cmath.e ** (-1j * A * x)))
+    return (Alpha_1 * (cmath.e ** (1j * A * x))) + (Beta_1 * (cmath.e ** (-1j * A * x)))
   
   def Psi2(x):
-    (Alpha_2 * (cmath.e ** (1j * B * x))) + (Beta_2 * (cmath.e ** (-1j * B * x)))
+    return (Alpha_2 * (cmath.e ** (1j * B * x))) + (Beta_2 * (cmath.e ** (-1j * B * x)))
 
   def Psi(x):
     if x - b >= 0:
       return Psi1(x)
     return Psi2(x)
 
-  x = cmath.linspace(-10, 10, 1000)
+  x = np.linspace(-10, 10, 1000)
   y = Psi1(x)
+  
+  y_real = y.real
+  y_imag = y.imag
+
 
   plt.plot(x, y)
+  plt.plot(x, y_real)
+  plt.plot(x, y_imag)
   plt.show()
 
