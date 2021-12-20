@@ -98,7 +98,7 @@ if __name__ == '__main__':
   A = np.sqrt(2*(Re_c ** 2 + Im_c **2) / np.pi)
 
   q = (4 * m * A) / (n * h_bar * h_bar)
-  depth = 100 # Both how deep the 1+1/(1+1/..) goes and how many coefficients - 1
+  depth = 1000 # Both how deep the 1+1/(1+1/..) goes and how many coefficients - 1
 
 
   oddEiegenValueFuncion = lambda P: calculateEigenValue(P, 100, q);
@@ -149,10 +149,10 @@ if __name__ == '__main__':
   oddCoefficients = [B_2]
 
   for coefficientOverA_0 in evenCoefficientsOverA_0Array:
-    evenCoefficients.append(coefficientOverA_0 * A_0 * np.sqrt(2))
+    evenCoefficients.append(coefficientOverA_0 * A_0)
 
   for coefficientOverB_2 in oddCoefficientsOverB_2Array:
-    oddCoefficients.append(coefficientOverB_2 * B_2 * np.sqrt(2))
+    oddCoefficients.append(coefficientOverB_2 * B_2) 
 
   print("Calculated coefficients")
   print("Even:")
@@ -164,7 +164,7 @@ if __name__ == '__main__':
   oddPsi = getOddPsi(oddCoefficients)
 
   a = np.pi / n
-  x = np.linspace(-4*a, 4*a, 1000)
+  x = np.linspace(-0*a, 4*a, 1000)
 
   phi = np.arctan( Im_c / Re_c )
   xPrime = getX_Prime(x, n, -phi)
@@ -176,7 +176,7 @@ if __name__ == '__main__':
   pot_y = potentialEnergy(x)
 
   composite = lambda x: evenPsi(getX_Prime(x, n, phi)) ** 2
-  H = quad(composite, -4*a, 4*a)[0]
+  H = quad(composite, -0*a, 4*a)[0]
   modEvenCoefficients = []
 
   for coef in evenCoefficients:
@@ -184,10 +184,10 @@ if __name__ == '__main__':
 
   newEvenPsi = getEvenPsi(modEvenCoefficients)
   newComposite = lambda x: (newEvenPsi(getX_Prime(x, n, phi))) ** 2
-  print(quad(newComposite, -4*a, 4*a))
+  print(quad(newComposite, -0*a, 4*a))
 
   plt.title("Graph of Psi Obtained by the Mathieu Equation")
-  plt.xlabel('-4a < X < 4a')
+  plt.xlabel('-a < X < a')
   plt.ylabel('Psi(X)')
 
   plt.plot(x, E_y, label="Psi(X) for even coefficients")
