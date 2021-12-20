@@ -44,13 +44,9 @@ if __name__ == '__main__':
 
   x = np.linspace(-10, 10, 1000)
   y = Psi1(x)
-  
-  y_real = y.real
-  y_imag = y.imag
-
 
   plt.plot(x, y)
-  plt.plot(x, y_real)
-  plt.plot(x, y_imag)
+  plt.plot(x, y.real)
+  plt.plot(x, y.imag)
   plt.show()
 
